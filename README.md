@@ -30,7 +30,7 @@
 
 ## Cấu trúc thư mục
 
-````
+```
 TimeToolsWebApp/
 ├── index.html # Trang chính ứng dụng
 ├── css/
@@ -102,5 +102,3 @@ Nếu bạn có góp ý hoặc muốn hợp tác phát triển, vui lòng liên 
 ---
 
 > Cảm ơn bạn đã quan tâm và sử dụng **TimeToolsWebApp**!
-
-````
