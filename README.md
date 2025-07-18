@@ -30,6 +30,7 @@
 
 ## Cấu trúc thư mục
 
+````
 TimeToolsWebApp/
 ├── index.html # Trang chính ứng dụng
 ├── css/
@@ -49,7 +50,7 @@ TimeToolsWebApp/
 │ ├── shedule.png # Icon đếm ngược tới sự kiện
 │ ├── stopwatch.png # Icon đồng hồ bấm giờ
 │ └── beep.mp3 # Âm thanh báo
-└── README.md # Tài liệu dự án
+└── README.md # Tài liệu dự án ```
 
 ## Hướng dẫn sử dụng
 
@@ -100,3 +101,4 @@ Nếu bạn có góp ý hoặc muốn hợp tác phát triển, vui lòng liên 
 ---
 
 > Cảm ơn bạn đã quan tâm và sử dụng **TimeToolsWebApp**!
+````
