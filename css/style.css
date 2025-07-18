@@ -1,0 +1,14 @@
+.img-header img {
+    width: auto;
+    max-height: 128px;
+}
+
+.nav {
+    background-color: chartreuse;
+}
+
+.nav-link:hover {
+    color: #0d6efd;
+    text-decoration: underline;
+    background-color: rgb(127, 255, 255);
+}
