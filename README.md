@@ -50,7 +50,8 @@ TimeToolsWebApp/
 │ ├── shedule.png # Icon đếm ngược tới sự kiện
 │ ├── stopwatch.png # Icon đồng hồ bấm giờ
 │ └── beep.mp3 # Âm thanh báo
-└── README.md # Tài liệu dự án ```
+└── README.md # Tài liệu dự án
+```
 
 ## Hướng dẫn sử dụng
 
