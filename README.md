@@ -97,8 +97,12 @@ Dự án này được cấp phép theo [MIT License](LICENSE).
 
 ## Liên hệ
 
-Nếu bạn có góp ý hoặc muốn hợp tác phát triển, vui lòng liên hệ qua email: `youremail@example.com`
+Nếu bạn có góp ý hoặc muốn hợp tác phát triển, vui lòng liên hệ qua:
+
+- 📧 Email: `leonardnguyen92@gmail.com`
+- 📞 Phone: `(+84) 912-345-678`
 
 ---
 
 > Cảm ơn bạn đã quan tâm và sử dụng **TimeToolsWebApp**!
+> © 2025 Leonard Nguyen – Made with ❤️ in Hà Nội, Việt Nam.
