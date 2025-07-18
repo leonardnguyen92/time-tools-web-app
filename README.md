@@ -104,5 +104,5 @@ Nếu bạn có góp ý hoặc muốn hợp tác phát triển, vui lòng liên 
 
 ---
 
-> Cảm ơn bạn đã quan tâm và sử dụng **TimeToolsWebApp**!
+> Cảm ơn bạn đã quan tâm và sử dụng **TimeToolsWebApp**!  
 > © 2025 Leonard Nguyen – Made with ❤️ in Hà Nội, Việt Nam.
