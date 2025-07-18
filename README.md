@@ -41,11 +41,13 @@ TimeToolsWebApp/
 │ ├── stopwatch.js # Logic đồng hồ bấm giờ
 │ ├── countdown.js # Logic đếm ngược tới sự kiện
 │ ├── timeCalculator.js # Các phép toán thời gian
-│ └── dom.js # Hàm thao tác DOM dùng chung
-├── utils/
+│ ├── dom.js # Hàm thao tác DOM dùng chung
 │ └── time-utils.js # Các hàm tiện ích xử lý thời gian
 ├── assets/
 │ ├── clock-icon.png # Icon đồng hồ
+│ ├── alarm.png # Icon báo thức
+│ ├── shedule.png # Icon đếm ngược tới sự kiện
+│ ├── stopwatch.png # Icon đồng hồ bấm giờ
 │ └── beep.mp3 # Âm thanh báo
 └── README.md # Tài liệu dự án
 
