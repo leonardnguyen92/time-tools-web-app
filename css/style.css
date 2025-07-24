@@ -4,11 +4,72 @@
 }
 
 .nav {
-    background-color: chartreuse;
+    background-color: #f0f0f0;
 }
 
 .nav-link:hover {
     color: #0d6efd;
     text-decoration: underline;
     background-color: rgb(127, 255, 255);
+}
+
+.digit-digital {
+    font-size: 80px;
+}
+
+.sep {
+    font-size: 45px;
+    line-height: 1;
+}
+
+/* .p-edit {
+    font-size: 30px;
+} */
+
+.calendar-table td,
+.calendar-table th {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.calendar-table td {
+    cursor: pointer;
+}
+
+.calendar-table td:hover {
+    background-color: #f0f8ff;
+}
+
+.calendar-table td.calendar-today {
+    background-color: #d1e7dd;
+    font-weight: bold;
+    border: 2px solid #0d6efd;
+}
+
+.btn-mini-calendar:hover {
+    background-color: darkblue;
+    color: white;
+}
+
+.icon-yellow {
+    color: gold;
+}
+
+#pomodoroDisplay {
+    font-size: 72px;
+}
+
+#pomodoro-status {
+    padding: 0.5rem 1rem;
+}
+
+@media (max-width: 576px) {
+
+    .calendar-table td,
+    .calendar-table th {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
 }
