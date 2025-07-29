@@ -33,7 +33,7 @@ class WorldClock {
     ];
     currentCity = null;
     currentOffset = 0;
-    interval = null;
+    intervalId = null;
     getLocalTimezoneOffset() {
         const now = new Date();
         const offset = - now.getTimezoneOffset() / 60;
@@ -75,8 +75,8 @@ class WorldClock {
 
         let pCity = "";
         if (cityName) {
-            pCity = cityName ? DOM.createElement("p", { class: "fw-bold fw-italic text-center" }) : "";
-            const pCityStr = cityName ? cityName : "";
+            pCity = DOM.createElement("p", { class: "fw-bold fw-italic text-center" });
+            const pCityStr = cityName;
             DOM.setText(pCity, pCityStr);
         }
         const elements = [pDate, pTime];
@@ -141,7 +141,7 @@ class WorldClock {
         cityElements.forEach(cityEl => {
             cityEl.addEventListener("click", e => {
                 const cityName = cityEl.dataset.city;
-                const offset = cityEl.dataset.offset;
+                const offset = Number(cityEl.dataset.offset);
                 this.currentCity = cityName;
                 this.currentOffset = offset;
                 this.updateLocalTime(offset);

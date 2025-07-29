@@ -106,11 +106,10 @@ class AlarmClock {
         const now = new Date();
         const currentHour = now.getHours();
         const currentMinute = now.getMinutes();
-        const currentSecond = now.getSeconds();
 
         this.alarms.forEach(alarm => {
             // Nếu đúng giờ phút và chưa kêu trong lần này
-            const isTimeMatched = alarm.hour === currentHour && alarm.minute === currentMinute && currentSecond === 0;
+            const isTimeMatched = alarm.hour === currentHour && alarm.minute === currentMinute;
             const isAlreadyTriggered = alarm.triggered;
 
             if (isTimeMatched && !isAlreadyTriggered) {

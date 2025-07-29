@@ -1,78 +1,112 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-<section id="world-clock" class="my-5">
-  <div class="card p-4 shadow-sm">
-    <h3 class="text-center">Đồng Hồ Thế Giới</h3>
-    <div id="localTime">
-      <p class="text-center">Đang load dữ liệu</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+  integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+  crossorigin="anonymous" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+<section id="countdown" class="my-5">
+  <div class="card shadow-sm p-4 text-center">
+    <!-- Header: Tiêu đề + Nút -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center w-100 mb-4">
+      <h4 id="titleEvents" class="h2 text-primary fw-bold mb-2 mb-md-0">
+        Thời gian tới năm mới
+      </h4>
+      <button class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#addEventModal">
+        <i class="bi bi-plus-circle"></i> Thêm sự kiện
+      </button>
     </div>
-    <h4 class="mb-3">Giờ các thành phố lớn</h4>
-    <div id="worldClockList" class="row row-cols-1 row-cols-md-3 g-3">
-      <div class="col-md-4 mb-3">
-        <div class="d-flex align-items-center p-2 rounded bg-light shadow-sm">
-          <div class="fw-semibold me-3 text-center" style="min-width: 40px">🇻🇳</div>
-          <div class="d-flex flex-column">
-            <a href="#">
-              <div class="fw-semibold">Hà Nội</div>
-              <div class="text-secondary small">T5 - 18:00:00</div>
-            </a>
-          </div>
-        </div>
+    <!-- Countdown -->
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <div class="d-flex flex-column align-items-center">
+        <span class="fw-bold time-style" id="cdDays">100</span>
+        <span class="title-style">Ngày</span>
       </div>
-      <div class="col-md-4 mb-3">
-        <div class="d-flex align-items-center p-2 rounded bg-light shadow-sm">
-          <div class="fw-semibold me-3 text-center" style="min-width: 40px">🇻🇳</div>
-          <div class="d-flex flex-column">
-            <a href="#">
-              <div class="fw-semibold">Hà Nội</div>
-              <div class="text-secondary small">T5 - 18:00:00</div>
-            </a>
-          </div>
-        </div>
+      <div class="d-flex flex-column align-items-center">
+        <span class="fw-bold time-style" id="cdHours">20</span>
+        <span class="title-style">Giờ</span>
       </div>
-      <div class="col-md-4 mb-3">
-        <div class="d-flex align-items-center p-2 rounded bg-light shadow-sm">
-          <div class="fw-semibold me-3 text-center" style="min-width: 40px">🇻🇳</div>
-          <div class="d-flex flex-column">
-            <a href="#">
-              <div class="fw-semibold">Hà Nội</div>
-              <div class="text-secondary small">T5 - 18:00:00</div>
-            </a>
-          </div>
-        </div>
+      <div class="d-flex flex-column align-items-center">
+        <span class="fw-bold time-style" id="cdMinutes">30</span>
+        <span class="title-style">Phút</span>
       </div>
-      <div class="col-md-4 mb-3">
-        <div class="d-flex align-items-center p-2 rounded bg-light shadow-sm">
-          <div class="fw-semibold me-3 text-center" style="min-width: 40px">🇻🇳</div>
-          <div class="d-flex flex-column">
-            <a href="#">
-              <div class="fw-semibold">Hà Nội</div>
-              <div class="text-secondary small">T5 - 18:00:00</div>
-            </a>
-          </div>
-        </div>
+      <div class="d-flex flex-column align-items-center">
+        <span class="fw-bold time-style" id="cdSeconds">30</span>
+        <span class="title-style">Giây</span>
       </div>
-      <div class="col-md-4 mb-3">
-        <div class="d-flex align-items-center p-2 rounded bg-light shadow-sm">
-          <div class="fw-semibold me-3 text-center" style="min-width: 40px">🇻🇳</div>
-          <div class="d-flex flex-column">
-            <a href="#">
-              <div class="fw-semibold">Hà Nội</div>
-              <div class="text-secondary small">T5 - 18:00:00</div>
-            </a>
-          </div>
+    </div>
+    <!-- Bảng sự kiện -->
+    <div class="eventTable mt-4">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>STT</th>
+            <th>Tên Sự Kiện</th>
+            <th>Thời Gian</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody id="eventTableBody">
+          <tr>
+            <td colspan="4" class="text-center text-muted">Chưa có sự kiện</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Thông báo -->
+    <div class="mt-4">
+      <p id="msgDisplay" class="display-5 fw-bold text-success">Happy New Year</p>
+    </div>
+  </div>
+  <!-- Container pháo hoa -->
+  <canvas id="canvas" style="display: block; position: fixed; top: 0; left: 0; z-index: 9999;"></canvas>
+  <audio id="fireworkSound" src="assets/sound/fireworks.mp3" preload="auto"></audio>
+  <!-- Modal Thêm sự kiện -->
+  <div class="modal fade" id="addEventModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold text-primary">Thêm sự kiện</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <div class="d-flex align-items-center p-2 rounded bg-light shadow-sm">
-          <div class="fw-semibold me-3 text-center" style="min-width: 40px">🇻🇳</div>
-          <div class="d-flex flex-column">
-            <a href="#">
-              <div class="fw-semibold">Hà Nội</div>
-              <div class="text-secondary small">T5 - 18:00:00</div>
-            </a>
-          </div>
+        <div class="modal-body">
+          <form id="eventForm">
+            <!-- Tên sự kiện -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">Tên sự kiện</label>
+              <input type="text" class="form-control" id="eventName" placeholder="Nhập tên sự kiện">
+            </div>
+            <!-- Thời gian sự kiện -->
+            <p class="fw-bold">Thời gian sự kiện</p>
+            <div class="row g-2">
+              <div class="col">
+                <input type="number" class="form-control" id="evHours" placeholder="Giờ">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" id="evMinutes" placeholder="Phút">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" id="evSeconds" placeholder="Giây">
+              </div>
+            </div>
+            <div class="row g-2 mt-2">
+              <div class="col">
+                <input type="number" class="form-control" id="evDays" placeholder="Ngày">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" id="evMonths" placeholder="Tháng">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" id="evYears" placeholder="Năm">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="button" class="btn btn-success" id="addEventBtn">Thêm</button>
         </div>
       </div>
     </div>
   </div>
 </section>
+<script type="module" src="js/countdown.js"></script>

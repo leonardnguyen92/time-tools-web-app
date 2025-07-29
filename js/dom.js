@@ -103,5 +103,14 @@ class DOM {
     static getElement(id) {
         return document.getElementById(id);
     }
+
+    static toggleVisibility(element, show) {
+        if (!element) return;
+        if (show) {
+            element.classList.remove("d-none");
+        } else {
+            element.classList.add("d-none");
+        }
+    }
 }
 export default DOM;

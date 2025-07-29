@@ -17,14 +17,47 @@
     font-size: 80px;
 }
 
-.sep {
-    font-size: 45px;
+.digit-digital-stopwatch {
+    font-size: 80px;
     line-height: 1;
 }
 
-/* .p-edit {
-    font-size: 30px;
-} */
+.sep {
+    font-size: 40px;
+    line-height: 1;
+}
+
+.sentence {
+    font-size: 40px;
+    line-height: 1;
+    position: relative;
+    bottom: 8px;
+}
+
+.stopwatch-display {
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.stopwatch-display span {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.milli {
+    font-size: 40px;
+    line-height: 1;
+    position: relative;
+    bottom: 0px;
+}
+
+#stop-watch {
+    font-family: monospace;
+    letter-spacing: normal;
+}
 
 .calendar-table td,
 .calendar-table th {
@@ -54,6 +87,82 @@
 
 .icon-yellow {
     color: gold;
+}
+
+.div-width {
+    min-width: 180px;
+}
+
+/* .time-style {
+    font-size: clamp(40px, 5vw, 80px);
+    display: block;
+}
+
+.title-style {
+    font-size: clamp(16px, 2vw, 30px);
+    display: block;
+} */
+
+.d-flex.flex-column span.title-style {
+    margin-top: -25px;
+    /* chỉnh sát số hơn */
+}
+
+.time-style {
+    font-size: 80px;
+}
+
+.title-style {
+    font-size: 28px;
+}
+
+@media (max-width: 768px) {
+    .time-style {
+        font-size: 50px;
+    }
+
+    .title-style {
+        font-size: 20px;
+    }
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* Bắn pháo hoa bay lên */
+@keyframes shoot {
+    0% {
+        transform: translateY(100vh) scaleY(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(20vh) scaleY(0.5);
+        opacity: 1;
+    }
+}
+
+/* Nổ tung (sau khi bay lên) */
+@keyframes explode {
+    0% {
+        width: 4px;
+        height: 80px;
+        opacity: 1;
+    }
+
+    100% {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: radial-gradient(circle, yellow, transparent);
+        opacity: 0;
+    }
 }
 
 #pomodoroDisplay {
