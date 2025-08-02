@@ -171,26 +171,26 @@
             <h4 id="titleEvents" class="h2 text-primary fw-bold mb-2 mb-md-0">
               Thời gian tới năm mới
             </h4>
-            <button class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#addEventModal">
+            <button class="btn btn-success btn-lg" id="addEvent">
               <i class="bi bi-plus-circle"></i> Thêm sự kiện
             </button>
           </div>
           <!-- Countdown -->
           <div class="d-flex justify-content-center gap-3 flex-wrap">
             <div class="d-flex flex-column align-items-center">
-              <span class="fw-bold time-style" id="cdDays">100</span>
+              <span class="fw-bold time-style" id="cdDays"></span>
               <span class="title-style">Ngày</span>
             </div>
             <div class="d-flex flex-column align-items-center">
-              <span class="fw-bold time-style" id="cdHours">20</span>
+              <span class="fw-bold time-style" id="cdHours"></span>
               <span class="title-style">Giờ</span>
             </div>
             <div class="d-flex flex-column align-items-center">
-              <span class="fw-bold time-style" id="cdMinutes">30</span>
+              <span class="fw-bold time-style" id="cdMinutes"></span>
               <span class="title-style">Phút</span>
             </div>
             <div class="d-flex flex-column align-items-center">
-              <span class="fw-bold time-style" id="cdSeconds">30</span>
+              <span class="fw-bold time-style" id="cdSeconds"></span>
               <span class="title-style">Giây</span>
             </div>
           </div>
@@ -200,6 +200,7 @@
               <thead class="table-light">
                 <tr>
                   <th>STT</th>
+                  <th>ID</th>
                   <th>Tên Sự Kiện</th>
                   <th>Thời Gian</th>
                   <th>Thao tác</th>
@@ -218,55 +219,109 @@
           </div>
         </div>
         <!-- Container pháo hoa -->
-        <div id="fireworkContainer" class="firework-container"></div>
-        <!-- Modal Thêm sự kiện -->
-        <div class="modal fade" id="addEventModal" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title fw-bold text-primary">Thêm sự kiện</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-              </div>
-              <div class="modal-body">
-                <form id="eventForm">
-                  <!-- Tên sự kiện -->
-                  <div class="mb-3">
-                    <label class="form-label fw-bold">Tên sự kiện</label>
-                    <input type="text" class="form-control" id="eventName" placeholder="Nhập tên sự kiện">
-                  </div>
-                  <!-- Thời gian sự kiện -->
-                  <p class="fw-bold">Thời gian sự kiện</p>
-                  <div class="row g-2">
-                    <div class="col">
-                      <input type="number" class="form-control" id="evHours" placeholder="Giờ">
-                    </div>
-                    <div class="col">
-                      <input type="number" class="form-control" id="evMinutes" placeholder="Phút">
-                    </div>
-                    <div class="col">
-                      <input type="number" class="form-control" id="evSeconds" placeholder="Giây">
-                    </div>
-                  </div>
-                  <div class="row g-2 mt-2">
-                    <div class="col">
-                      <input type="number" class="form-control" id="evDays" placeholder="Ngày">
-                    </div>
-                    <div class="col">
-                      <input type="number" class="form-control" id="evMonths" placeholder="Tháng">
-                    </div>
-                    <div class="col">
-                      <input type="number" class="form-control" id="evYears" placeholder="Năm">
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-success" id="addEventBtn">Thêm</button>
-              </div>
+        <canvas id="canvas" style="display: block; position: fixed; top: 0; left: 0; z-index: 9999;"></canvas>
+        <audio id="fireworkSound" src="assets/sound/fireworks.mp3" preload="auto"></audio>
+        <!-- Form Thêm sự kiện -->
+        <form id="addEventForm" class="card shadow-sm p-4 mb-4 d-none">
+          <h5 class="fw-bold text-primary text-center">Thêm sự kiện</h5>
+          <div class="mb-3">
+            <label for="evName" class="form-label fw-bold">Tên sự kiện</label>
+            <input type="text" class="form-control" id="evName" placeholder="Nhập tên sự kiện">
+          </div>
+          <p class="fw-bold">Thời gian sự kiện</p>
+          <div class="row g-2">
+            <div class="col-2">
+              <input type="number" class="form-control" id="evHours" placeholder="Giờ">
+            </div>
+            <div class="col-2">
+              <input type="number" class="form-control" id="evMinutes" placeholder="Phút">
+            </div>
+            <div class="col-2">
+              <input type="number" class="form-control" id="evSeconds" placeholder="Giây">
+            </div>
+            <div class="col-2">
+              <input type="number" class="form-control" id="evDays" placeholder="Ngày">
+            </div>
+            <div class="col-2">
+              <input type="number" class="form-control" id="evMonths" placeholder="Tháng">
+            </div>
+            <div class="col-2">
+              <input type="number" class="form-control" id="evYears" placeholder="Năm">
             </div>
           </div>
-        </div>
+          <div class="row g-2 mt-2">
+            <label for="evMusic" class="form-label">Chọn âm thanh thông báo</label>
+            <select name="evMusic" id="evMusic" class="form-select eventSounds"></select>
+          </div>
+          <div class="row g-2 mt-2">
+            <label for="evMsg" class="form-label fw-bold">Lời chúc mừng</label>
+            <input type="text" class="form-control" id="evMsg" placeholder="Nhập lời chúc mừng">
+          </div>
+          <div class="mt-3 text-center">
+            <button type="button" class="btn btn-secondary me-2" id="cancelAddEvent">Hủy</button>
+            <button type="button" class="btn btn-success" id="addEventBtn">Thêm</button>
+          </div>
+        </form>
+        <!-- Form Sửa sự kiện -->
+        <form id="editEventForm" class="card shadow-sm p-4 mb-4 d-none">
+          <h5 class="fw-bold text-primary">Cập nhật sự kiện</h5>
+          <div class="mb-3">
+            <label for="editEventName" class="form-label fw-bold">Tên sự kiện</label>
+            <input type="text" class="form-control" id="editEventName" placeholder="Nhập tên sự kiện">
+          </div>
+          <div class="mb-3">
+            <input type="hidden" name="editEventId" id="editId">
+          </div>
+          <p class="fw-bold">Thời gian sự kiện</p>
+          <div class="row g-2">
+            <div class="col-2">
+              <input type="number" class="form-control" id="editHours" placeholder="Giờ">
+            </div>
+            <div class="col-2">
+              <input type="number" class="form-control" id="editMinutes" placeholder="Phút">
+            </div>
+            <div class="col-2">
+              <input type="number" class="form-control" id="editSeconds" placeholder="Giây">
+            </div>
+            <div class="col-2">
+              <input type="number" class="form-control" id="editDays" placeholder="Ngày">
+            </div>
+            <div class="col-2">
+              <input type="number" class="form-control" id="editMonths" placeholder="Tháng">
+            </div>
+            <div class="col-2">
+              <input type="number" class="form-control" id="editYears" placeholder="Năm">
+            </div>
+          </div>
+          <div class="row g-2 mt-2">
+            <label for="editMusic" class="form-label">Chọn âm thanh thông báo</label>
+            <select name="editMusic" id="editMusic" class="form-select eventSounds"></select>
+          </div>
+          <div class="row g-2 mt-2">
+            <label for="editMsg" class="form-label fw-bold">Lời chúc mừng</label>
+            <input type="text" class="form-control" id="editMsg" placeholder="Nhập lời chúc mừng">
+          </div>
+          <div class="mt-3 text-center">
+            <button type="button" class="btn btn-secondary me-2" id="cancelEditEvent">Hủy</button>
+            <button type="button" class="btn btn-success" id="editEventBtn">Cập nhật</button>
+          </div>
+        </form>
+        <!-- Form Xoá sự kiện -->
+        <form id="deleteEventForm" class="card shadow-sm p-4 mb-4 d-none">
+          <h5 class="fw-bold text-primary">Xoá sự kiện</h5>
+          <div class="mb-3">
+            <label for="deleteEventName" class="form-label fw-bold">Tên sự kiện</label>
+            <input type="text" class="form-control" id="deleteEventName" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="deleteEventTime" class="form-label">Thời gian sự kiện</label>
+            <input type="text" class="form-control" id="deleteEventTime" disabled>
+          </div>
+          <div class="mt-3 text-center">
+            <button type="button" class="btn btn-secondary me-2" id="cancelDeleteEvent">Hủy</button>
+            <button type="button" class="btn btn-danger" id="deleteEventBtn">Xoá</button>
+          </div>
+        </form>
       </section>
       <section id="time-calculator" class="my-5">
         <div class="card p-4 shadow-sm">
@@ -279,8 +334,8 @@
             <div class="col-md-2 text-center">
               <label class="form-label d-block">Phép tính</label>
               <select id="timeOperator" class="form-select">
-                <option value="+">+</option>
-                <option value="-">−</option>
+                <option value="addition">+</option>
+                <option value="subtraction">−</option>
               </select>
             </div>
             <div class="col-md-5">
@@ -288,7 +343,7 @@
               <input type="time" class="form-control" id="time2" required />
             </div>
             <div class="col-12 mt-3">
-              <button type="submit" class="btn btn-primary">Tính kết quả</button>
+              <button type="button" id="resultButton" class="btn btn-primary">Tính kết quả</button>
             </div>
           </form>
           <div id="calcResult" class="alert alert-info mt-4 d-none text-center fw-bold">
@@ -301,7 +356,7 @@
           <h3 class="mb-4">Pomodoro Timer 🍅</h3>
 
           <div class="mb-3">
-            <span id="pomodoro-status" class="badge bg-primary fs-5">Work</span>
+            <span id="pomodoroStatus" class="badge bg-primary fs-5">Work</span>
           </div>
 
           <p id="pomodoroDisplay" class="display-1 fw-bold">25:00</p>
@@ -311,7 +366,7 @@
             <button id="pomodoroPauseBtn" class="btn btn-warning">Pause</button>
             <button id="pomodoroResetBtn" class="btn btn-danger">Reset</button>
           </div>
-
+          <audio id="pomodoroSound" src="assets/sound/alarm.mp3" preload="auto"></audio>
           <div class="row mt-4 text-start">
             <h5>Thiết lập thời gian:</h5>
             <div class="col-md-4">

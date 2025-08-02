@@ -4,11 +4,17 @@ import DOM from "./dom.js";
 import AlarmClock from "./alarm.js";
 import WorldClock from "./world-clock.js";
 import Stopwatch from "./stopwatch.js";
+import CountdownManager from "./countdown.js";
+import TimeCalculator from "./timeCalculator.js";
+import Pomodoro from "./pomodoro.js";
 
-let clockDisplay = new Clock();
-let alarmDisplay = new AlarmClock();
-let worldClockDisplay = new WorldClock();
+const clockDisplay = new Clock();
+const alarmDisplay = new AlarmClock();
+const worldClockDisplay = new WorldClock();
+const cm = new CountdownManager();
 const stopwatch = new Stopwatch();
+const timeCalculator = new TimeCalculator();
+const pMain = new Pomodoro();
 let currentMonth = Calendar.getCurrentMonthYear().month + 1;
 let currentYear = Calendar.getCurrentMonthYear().year;
 const sections = document.querySelectorAll("section");
@@ -107,4 +113,7 @@ window.addEventListener("DOMContentLoaded", () => {
     attachNavEvents();
     worldClockDisplay.initWorldClock();
     stopwatch.initStopwatch();
+    cm.init();
+    timeCalculator.init();
+    pMain.init();
 });

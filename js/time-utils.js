@@ -1,3 +1,5 @@
+import LunarCalendar from "./lunar-calendar.js";
+
 class TimeUtils {
     /**
      * Chuyển thứ từ số (0–6) sang chuỗi tiếng Việt
@@ -144,6 +146,31 @@ class TimeUtils {
         return { days, hours, minutes, seconds, isOver: false };
     }
 
+    static getLunarNewYearDay() {
+        const now = new Date();
+        let year = now.getFullYear();
+        let d, m, y;
+        [d, m, y] = LunarCalendar.convertLunarToSolar(1, 1, year, false, 7);
+        //${year}-04-30T00:00:00
+        const strLunar = `${y}-${this.formatTwoDigits(m)}-${this.formatTwoDigits(d)}T00:00:00`;
+        const lunarNewYearDay = new Date(strLunar);
+        if (now > lunarNewYearDay) {
+            [d, m, y] = LunarCalendar.convertLunarToSolar(1, 1, (year + 1), false, 7);
+        }
+        return new Date(`${y}-${this.formatTwoDigits(m)}-${this.formatTwoDigits(d)}T00:00:00`);
+    }
+
+    static convertMinutesToHours(minutes) {
+        const minutesStr = this.formatTwoDigits(minutes % 60);
+        const hoursStr = this.formatTwoDigits(Math.floor(minutes / 60));
+        return `${hoursStr}:${minutesStr}`;
+    }
+
+    static convertTimesToMinutes(times) {
+        const parts = times.split(":");
+        const minutes = Number(parts[0]) * 60 + Number(parts[1]);
+        return minutes;
+    }
 }
 
 export default TimeUtils;
